@@ -29,7 +29,7 @@
               "properties": {
                 "language": {
                   "type": "string",
-                  "description": "language",
+                  "description": "Your language (should appair in the project)",
                   "title": "Your language (should appair in the project)",
                   "default": "fr",
                   "x-ms-visibility": "important",

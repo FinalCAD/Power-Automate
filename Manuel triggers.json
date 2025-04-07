@@ -3,7 +3,7 @@
       "post": {
         "responses": {},
         "summary": "Trigger - Observation updated",
-        "description": "rigger the flow when an observation is updated",
+        "description": "Trigger the flow when an observation is updated",
         "operationId": "ThenObsUpdated",
 "/webhooks/ev/301": {
       "post": {
