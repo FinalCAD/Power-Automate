@@ -1,0 +1,13 @@
+description: 	Connecteur pour Finalcad One 2025		<--  au moins 30 caracteres
+title: 			Connecteur pour Finalcad One			<--  moins de 30 caracteres
+version: '1.0'
+termsOfService: https://www.finalcad.com/legal			<-- url documentation
+contact:
+    name: Finalcad										<-- nom du support 
+    url: https://developer.finalcad.com/contact				<-- email du support
+    email: support@finalcad.com								<-- email du support
+metadata:
+  - Website: 		https://finalcad.com/				<--url idem termsOfService 
+  - Privacy policy: https://developer.finalcad.com/		<-- url des conditions d'utilisation
+
+

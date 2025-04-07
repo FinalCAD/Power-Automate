@@ -1,0 +1,41 @@
+"info": {
+    "description": "Finalcad One is a construction management platform designed to improve collaboration, track progress, and streamline field operations. With this connector, you can integrate Finalcad One with hundreds of other applications to simplify project tracking, automate repetitive tasks, and enhance overall efficiency.",
+    "title": "Finalcad One Connect",
+    "version": "1.0",
+    "termsOfService": "https://www.finalcad.com/legal",
+    "contact": {
+      "name": "Finalcad",
+      "url": "https://www.finalcad.com/contact",
+      "email": "support@finalcad.com"
+    }
+  },
+  "host": "developer.finalcad.cloud",
+  "basePath": "/api",
+  "x-ms-connector-metadata": [
+    {
+      "propertyName": "Website",
+      "propertyValue": "https://developer.finalcad.com/"
+    },
+    {
+      "propertyName": "Privacy policy",
+      "propertyValue": "https://www.finalcad.com/apps-privacy-policy"
+    },
+    {
+      "propertyName": "Categories",
+      "propertyValue": "Productivity"
+    }
+  ],
+  "x-authentication": {
+    "api_key": {
+      "type": "securestring",
+      "uiDefinition": {
+        "displayName": "You ApiKey",
+        "tooltip": "Provide your FC1 ApiKey",
+        "constraints": {
+          "tabIndex": 2,
+          "clearText": false,
+          "required": "true"
+        }
+      }
+    }
+  },

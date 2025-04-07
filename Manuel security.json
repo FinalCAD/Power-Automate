@@ -1,0 +1,12 @@
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-api-key"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],

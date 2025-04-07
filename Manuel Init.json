@@ -1,0 +1,141 @@
+    "/InitParameters": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "language": {
+                  "type": "string"
+                },
+                "timezone": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Setup - Language and timezone",
+        "description": "Setup the language and timezone configuration",
+        "operationId": "InitParameters",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "language": {
+                  "type": "string",
+                  "description": "language",
+                  "title": "Your language (should appair in the project)",
+                  "default": "fr",
+                  "x-ms-visibility": "important",
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetLanguagesList",
+                    "itemsPath": "langs",
+                    "itemValuePath": "code",
+                    "itemTitlePath": "name",
+                    "parameters": {}
+                  }
+                },
+                "timezone": {
+                  "type": "string",
+                  "description": "time-zone",
+                  "title": "Your time-zone",
+                  "x-ms-visibility": "important",
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetTimezonesList",
+                    "itemsPath": "time_zones",
+                    "itemValuePath": "id",
+                    "itemTitlePath": "display_name",
+                    "parameters": {
+                      "limit": {
+                        "value": "999"
+                      },
+                      "offset": {
+                        "value": "0"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/init": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "business_organization_id": {
+                  "type": "string"
+                },
+                "project_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Setup - Project",
+        "description": "Setup the project configuration",
+        "operationId": "Init",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "business_organization_id": {
+                  "type": "string",
+                  "description": "business_organization_id",
+                  "title": "",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrganizations",
+                    "value-path": "id",
+                    "value-title": "name"
+                  }
+                },
+                "project_id": {
+                  "type": "string",
+                  "description": "project_id",
+                  "title": "",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetProjects",
+                    "value-path": "project_id",
+                    "value-collection": "projects",
+                    "value-title": "name",
+                    "parameters": {
+                      "organizationId": {
+                        "parameter": "business_organization_id"
+                      }
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetProjects",
+                    "itemsPath": "Projects",
+                    "itemValuePath": "project_id",
+                    "itemTitlePath": "name",
+                    "parameters": {
+                      "organizationId": {
+                        "parameterReference": "body/business_organization_id"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }

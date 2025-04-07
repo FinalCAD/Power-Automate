@@ -1,0 +1,52 @@
+"parameters": [
+  {
+    "description": "",
+    "in": "path",
+    "name": "mediaId",
+    "required": true,
+    "type": "string"
+  },
+  {
+    "default": "en",
+    "description": "Language usage",
+    "in": "header",
+    "name": "Accept-Language",
+    "type": "string"
+  },
+  {
+    "description": "chunk id",
+    "in": "formData",
+    "name": "chunk_id",
+    "required": true,
+    "type": "string"
+  },
+  {
+    "description": "chunk index",
+    "in": "formData",
+    "name": "segment_index",
+    "required": true,
+    "type": "integer"
+  },
+  {
+    "description": "is it the last chunk",
+    "in": "formData",
+    "name": "last_chunk",
+    "required": true,
+    "type": "boolean"
+  },
+  {
+    "description": "chunk md5",
+    "in": "formData",
+    "name": "md5",
+    "required": true,
+    "type": "string"
+  },
+  {
+    "description": "chunk stream",
+    "in": "formData",
+    "name": "stream",
+    "required": true,
+    "type": "file"
+  }
+],
+

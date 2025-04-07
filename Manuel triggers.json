@@ -1,0 +1,161 @@
+
+"/webhooks/ev/202": {
+      "post": {
+        "responses": {},
+        "summary": "Trigger - Observation updated",
+        "description": "rigger the flow when an observation is updated",
+        "operationId": "ThenObsUpdated",
+"/webhooks/ev/301": {
+      "post": {
+        "responses": {},
+        "summary": "Trigger - Form created",
+        "description": "Trigger the flow when a form is created",
+        "operationId": "ThenFormCreated",
+"/webhooks/ev/302": {
+      "post": {
+        "responses": {},
+        "summary": "Trigger - Form updated",
+        "description": "Trigger the flow when a form is updated",
+        "operationId": "ThenFormUpdated",
+"/webhooks/ev/401": {
+      "post": {
+        "responses": {},
+        "summary": "Trigger - Document created",
+        "description": "Trigger the flow when a document is created",
+        "operationId": "ThenDocumentCreated",
+
+
+    "/webhooks/ev/201": {
+          "x-ms-notification-content": {
+            "description": "Webhook",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "parent_id": {
+                  "type": "string",
+                  "description": "parent_id"
+                },
+                "event": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "event"
+                },
+                "element_id": {
+                  "type": "string",
+                  "description": "element_id"
+                },
+                "data1": {
+                  "type": "string",
+                  "description": "data1"
+                },
+                "data2": {
+                  "type": "string",
+                  "description": "data2"
+                },
+                "data3": {
+                  "type": "string",
+                  "description": "data3"
+                }
+              }
+            }
+          },
+          "post": {
+            "responses": {},
+            "summary": "Trigger - Observation created",
+            "description": "Trigger the flow when an observation is created",
+            "operationId": "ThenObsCreated",
+            "x-ms-trigger": "single",
+            "consumes": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "body",
+                "in": "body",
+                "required": false,
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "event": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "event",
+                      "title": "",
+                      "x-ms-visibility": "internal"
+                    },
+                    "business_organization_id": {
+                      "type": "string",
+                      "description": "business_organization_id",
+                      "title": "",
+                      "x-ms-dynamic-values": {
+                        "operationId": "GetOrganizations",
+                        "value-path": "id",
+                        "value-title": "name"
+                      }
+                    },
+                    "project_id": {
+                      "type": "string",
+                      "description": "project_id",
+                      "title": "",
+                      "x-ms-dynamic-values": {
+                        "operationId": "GetProjects",
+                        "value-path": "project_id",
+                        "value-collection": "projects",
+                        "value-title": "name",
+                        "parameters": {
+                          "organizationId": {
+                            "parameter": "business_organization_id"
+                          }
+                        }
+                      },
+                      "x-ms-dynamic-list": {
+                        "operationId": "GetProjects",
+                        "itemsPath": "Projects",
+                        "itemValuePath": "project_id",
+                        "itemTitlePath": "name",
+                        "parameters": {
+                          "organizationId": {
+                            "parameterReference": "body/business_organization_id"
+                          }
+                        }
+                      }
+                    },
+                    "client_url": {
+                      "type": "string",
+                      "description": "client_url",
+                      "title": "",
+                      "x-ms-visibility": "internal",
+                      "default": "url",
+                      "x-ms-notification-url": true
+                    }
+                  },
+                  "required": [
+                    "client_url"
+                  ]
+                }
+              }
+            ]
+          }
+    },
+    
+    "/webhooks/{webhookid}": {
+      "delete": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "Delete WebHook",
+        "operationId": "DeleteWebHook",
+        "x-ms-visibility": "internal",
+        "parameters": [
+          {
+            "name": "webhookid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
