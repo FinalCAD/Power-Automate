@@ -1,0 +1,336 @@
+<div
+  style="
+    box-sizing: border-box;
+    max-width: 761px;
+    width: 761px;
+    height: 908px;
+    padding: 80px;
+    background: #f4f6f8;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <div
+    style="
+      box-sizing: border-box;
+      width: 601px;
+      height: 568px;
+      padding-top: 40px;
+      padding-bottom: 80px;
+      padding-left: 24px;
+      padding-right: 24px;
+      background: white;
+      border-radius: 4px;
+      border: 1px rgba(98.99, 115.01, 129, 0.2) solid;
+      justify-content: center;
+      gap: 40px;
+    "
+  >
+    <img src="cid:logo" />
+    <div
+      style="
+        align-self: stretch;
+        height: 37px;
+        text-align: center;
+        color: #172134;
+        font-size: 18px;
+        font-family: Effra;
+        font-weight: bold;
+        line-height: 60px;
+        word-wrap: break-word;
+      "
+    >
+      L'observation #@{outputs('Get_1_observation')?['body/legacy_id']} a été
+      créée
+    </div>
+    <div
+      style="
+        color: #172134;
+        font-size: 14px;
+        font-family: Effra;
+        font-weight: 400;
+        line-height: 60px;
+        margin-left: 80px;
+      "
+    >
+      Bonjour,
+    </div>
+    <div
+      style="
+        color: #172134;
+        font-size: 14px;
+        font-family: Effra;
+        font-weight: 400;
+        line-height: 40px;
+        margin-left: 80px;
+      "
+    >
+      L'observation suivante a été créée dans le projet
+      @{outputs('Get_1_observation')?['body/project_name']}
+    </div>
+    <div
+      style="
+        color: #172134;
+        font-size: 14px;
+        font-family: Effra;
+        font-weight: 400;
+        line-height: 40px;
+        margin-bottom: 20px;
+        margin-left: 80px;
+        word-wrap: break-word;
+      "
+    >
+      de l'organisation
+      @{outputs('Get_1_observation')?['body/organization_name']} :
+    </div>
+    <div
+      style="
+        box-sizing: border-box;
+        border-radius: 16px;
+        background: #f5f5f5;
+        backdrop-filter: blur(10px);
+        width: 416px;
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+      "
+    >
+      <div
+        style="
+          box-sizing: border-box;
+          border-radius: 16px;
+          background: white;
+          width: 400px;
+          margin: 6px;
+          display: inline-block;
+        "
+      >
+        <table style="width: 375px; margin: 10px">
+          <tbody>
+            <tr>
+              <td>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div
+                          style="
+                            color: #848f9d;
+                            font-size: 12px;
+                            font-family: Effra;
+                            font-weight: 500;
+                            line-height: 14.4px;
+                            word-wrap: break-word;
+                          "
+                        >
+                          #@{outputs('Get_1_observation')?['body/legacy_id']}
+                        </div>
+                      </td>
+                      <td>
+                        <div
+                          style="
+                            color: #848f9d;
+                            font-size: 12px;
+                            font-family: Effra;
+                            font-weight: 400;
+                            line-height: 14.4px;
+                            word-wrap: break-word;
+                          "
+                        >
+                          Model
+                        </div>
+                      </td>
+                      <td>
+                        <div
+                          style="
+                            color: #848f9d;
+                            font-size: 12px;
+                            font-family: Effra;
+                            font-weight: 400;
+                            line-height: 14.4px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                          "
+                        >
+                          @{outputs('Compose_texte')}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="
+                    width: 300px;
+                    color: #172134;
+                    font-size: 18px;
+                    font-family: Effra;
+                    font-weight: 500;
+                    line-height: 21.6px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    text-align: left;
+                  "
+                >
+                  @{outputs('Get_1_observation')?['body/description']}
+                </div>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div
+                          style="
+                            padding-left: 8px;
+                            padding-right: 8px;
+                            padding-top: 4px;
+                            padding-bottom: 4px;
+                            background: rgba(76, 171, 242, 0.1);
+                            border-radius: 4px;
+                            align-items: center;
+                            gap: 4px;
+                          "
+                        >
+                          <div
+                            style="
+                              width: 70px;
+                              color: #4cabf2;
+                              font-size: 12px;
+                              font-family: Effra;
+                              font-weight: 500;
+                              line-height: 14.4px;
+                              white-space: nowrap;
+                              overflow: hidden;
+                              text-overflow: ellipsis;
+                            "
+                          >
+                            @{outputs('Get_1_observation')?['body/status_name']}
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <img src="cid:media" />
+                      </td>
+                      <td>
+                        <div
+                          style="
+                            width: 70px;
+                            color: #848f9d;
+                            font-size: 12px;
+                            font-family: Effra;
+                            font-weight: 500;
+                            line-height: 14.4px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                          "
+                        >
+                          @{outputs('Get_1_observation')?['body/assignee_name']}
+                        </div>
+                      </td>
+                      <td>
+                        <img src="cid:building" />
+                      </td>
+                      <td>
+                        <div
+                          style="
+                            width: 70px;
+                            color: #848f9d;
+                            font-size: 12px;
+                            font-family: Effra;
+                            font-weight: 500;
+                            line-height: 14.4px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                          "
+                        >
+                          @{outputs('Get_1_observation')?['body/company_name']}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td style="width: 55px">@{outputs('image2html')}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <a
+      href="@{outputs('Get_1_observation')?['body/web_url']}"
+      style="text-decoration: none"
+    >
+      <div
+        style="
+          padding-left: 12px;
+          padding-right: 12px;
+          padding-top: 7.5px;
+          padding-bottom: 7.5px;
+          background: #ff8029;
+          border-radius: 200px;
+          overflow: hidden;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          display: flex;
+          text-align: center;
+          width: fit-content;
+          margin: 0 auto;
+          margin-top: 10px;
+        "
+      >
+        <div
+          style="
+            width: 1px;
+            align-self: stretch;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div
+            style="width: 1px; height: 9px; background: rgba(196, 196, 196, 0)"
+          ></div>
+        </div>
+        <div
+          style="
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            font-family: Effra;
+            font-weight: 500;
+            line-height: 16.8px;
+            word-wrap: break-word;
+          "
+        >
+          Ouvrir l'observation
+        </div>
+        <div style="position: relative">
+          <img src="cid:arrow" />
+        </div>
+      </div>
+    </a>
+  </div>
+  <div
+    style="
+      margin: auto;
+      width: 368px;
+      mix-blend-mode: luminosity;
+      text-align: center;
+      color: #848f9d;
+      font-size: 12px;
+      font-family: Effra;
+      font-weight: 400;
+      line-height: 18px;
+      word-wrap: break-word;
+    "
+  >
+    This email is sent at the request of
+    @{outputs('Get_user_infos')?['body/email']} . If you do not wish to follow
+    up on this invitation you can ignore this email, or contact
+    @{outputs('Get_user_infos')?['body/email']} to ask not to solicit you any
+    more. Copyright 2025 Finalcad. All rights reserved Finalcad SAS, 4, rue
+    Jules Lefebvre, Paris, Ile-de-France 75009 France
+  </div>
+</div>
