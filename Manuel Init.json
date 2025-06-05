@@ -1,3 +1,5 @@
+{
+  "paths": {
     "/InitParameters": {
       "post": {
         "responses": {
@@ -98,8 +100,9 @@
               "properties": {
                 "business_organization_id": {
                   "type": "string",
-                  "description": "business_organization_id",
-                  "title": "",
+                  "description": "business organization id",
+                  "x-ms-summary": "business organization id",
+                  "title": "business organization id",
                   "x-ms-dynamic-values": {
                     "operationId": "GetOrganizations",
                     "value-path": "id",
@@ -108,8 +111,9 @@
                 },
                 "project_id": {
                   "type": "string",
-                  "description": "project_id",
-                  "title": "",
+                  "description": "project id",
+                  "x-ms-summary": "project id",
+                  "title": "project id",
                   "x-ms-dynamic-values": {
                     "operationId": "GetProjects",
                     "value-path": "project_id",
@@ -139,3 +143,5 @@
         ]
       }
     }
+  }
+}

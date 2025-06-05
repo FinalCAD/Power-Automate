@@ -1,52 +1,59 @@
-"parameters": [
-  {
-    "description": "",
-    "in": "path",
-    "name": "mediaId",
-    "required": true,
-    "type": "string"
-  },
-  {
-    "default": "en",
-    "description": "Language usage",
-    "in": "header",
-    "name": "Accept-Language",
-    "type": "string"
-  },
-  {
-    "description": "chunk id",
-    "in": "formData",
-    "name": "chunk_id",
-    "required": true,
-    "type": "string"
-  },
-  {
-    "description": "chunk index",
-    "in": "formData",
-    "name": "segment_index",
-    "required": true,
-    "type": "integer"
-  },
-  {
-    "description": "is it the last chunk",
-    "in": "formData",
-    "name": "last_chunk",
-    "required": true,
-    "type": "boolean"
-  },
-  {
-    "description": "chunk md5",
-    "in": "formData",
-    "name": "md5",
-    "required": true,
-    "type": "string"
-  },
-  {
-    "description": "chunk stream",
-    "in": "formData",
-    "name": "stream",
-    "required": true,
-    "type": "file"
+{
+  "paths": {
+    "/medias/{mediaId}/uploadappend": {
+      "post": {
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "description": "the Media ID",
+            "x-ms-summary": "the Media ID",
+            "in": "path",
+            "name": "mediaId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "en",
+            "x-ms-summary": "Language usage",
+            "description": "Language usage",
+            "in": "header",
+            "name": "Accept-Language",
+            "type": "string"
+          },
+          {
+            "description": "the chunk ID",
+            "x-ms-summary": "the Chunk ID",
+            "in": "formData",
+            "name": "chunk_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "chunk index",
+            "x-ms-summary": "Chunk index",
+            "in": "formData",
+            "name": "segment_index",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "is this chunk the last one",
+            "x-ms-summary": "is this chunk the last one",
+            "in": "formData",
+            "name": "last_chunk",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "description": "the stream",
+            "x-ms-summary": "the stream",
+            "in": "formData",
+            "name": "stream",
+            "required": true,
+            "type": "file"
+          }
+        ]
+      }
+    }
   }
-],
-
+}

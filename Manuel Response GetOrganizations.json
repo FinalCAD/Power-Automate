@@ -1,3 +1,7 @@
+{
+  "paths": {
+    "/organizations": {
+      "get": {
         "responses": {
           "200": {
             "description": "OK",
@@ -8,7 +12,7 @@
                 "properties": {
                   "id": {
                     "type": "string",
-                    "description": "id",
+                    "description": "id"
                   },
                   "name": {
                     "type": "string",
@@ -18,4 +22,8 @@
               }
             }
           }
-        },
+        }
+      }
+    }
+  }
+}
