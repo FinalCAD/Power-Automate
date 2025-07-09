@@ -1,4 +1,4 @@
-operation -> init
+operation -> init* ----------------------------------
 
 public class Script : ScriptBase
 {
@@ -13,4 +13,97 @@ public class Script : ScriptBase
 
             return response;
     }
+}
+
+V3 ------------------------------------------------------------------
+public class Script : ScriptBase
+{
+    public override async Task<HttpResponseMessage> ExecuteAsync()
+    {
+        string operation = this.Context.OperationId;
+        switch(operation){
+            case "MediaUploadChunk4":
+                return await ExtractChunk();
+            default:
+                var body = await this.Context.Request.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var jsonObject = JsonConvert.DeserializeObject(body);
+                var response = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(jsonObject), Encoding.UTF8, "application/json")
+                };
+                return response;
+        }
+    }
+
+    private async Task<HttpResponseMessage> ExtractChunk()
+    {
+		string chunkId = "";
+		int segmentIndex = 0;
+		bool lastChunk = true;
+		string fileName = "";
+		string contentType = "";
+		string base64Content = "";
+		try{
+			var body = JObject.Parse(await this.Context.Request.Content.ReadAsStringAsync());
+			chunkId = (string)body["chunk_id"];
+			segmentIndex = (int)body["segment_index"];
+			lastChunk = (bool)body["last_chunk"];
+			var stream = body["stream"];
+			fileName = (string)stream["filename"];
+			contentType = (string)stream["contentType"];
+			base64Content = (string)stream["content"];
+		}
+		catch{
+			return new HttpResponseMessage(HttpStatusCode.NotImplemented){Content = new StringContent("erreur get"};
+		}
+		var multipart = new MultipartFormDataContent();
+		byte[] fileBytes;
+		try{
+			fileBytes = Convert.FromBase64String(base64Content);
+			var chunkSize=5*1024*1024;
+			var start = (segmentIndex-1)*chunkSize;
+			int sliceLen = Math.Min(chunkSize, fileBytes.Length - start);
+			byte[] slice = new byte[sliceLen];
+			Array.Copy(fileBytes, start, slice, 0, sliceLen);
+			if (start + chunkSize >= fileBytes.Length)
+				lastChunk=true;
+			multipart.Add(new StringContent(chunkId), "chunk_id");
+			multipart.Add(new StringContent(segmentIndex.ToString()), "segment_index");
+			multipart.Add(new StringContent(lastChunk.ToString().ToLower()), "last_chunk");
+			var buffer = new MemoryStream(slice, 0, sliceLen);
+			multipart.Add(new StreamContent(buffer), "stream", fileName);
+		}
+		catch(Exception ex){
+			return new HttpResponseMessage(HttpStatusCode.NotImplemented)
+						{
+							Content = new StringContent("erreur split fn={fileName} ci={chunkId} si={segmentIndex} lc={lastChunk} l={sliceLen}" + ex.Message)
+						};
+		}
+		try{
+			var request = new HttpRequestMessage(HttpMethod.Post, this.Context.Request.RequestUri)
+			{
+				Content = multipart
+			};
+			if (this.Context.Request.Headers.Contains("x-api-key"))
+			{
+				var apiKey = this.Context.Request.Headers.GetValues("x-api-key").FirstOrDefault();
+				request.Headers.Add("x-api-key", apiKey);
+			}
+			if (this.Context.Request.Headers.Contains("Authorization"))
+			{
+				var auth = this.Context.Request.Headers.GetValues("Authorization").FirstOrDefault();
+				request.Headers.Authorization = new AuthenticationHeaderValue("token", auth.Replace("token ", ""));
+			}
+			try{
+				var response = await this.Context.SendAsync(request, this.CancellationToken);
+				return response;
+			}
+			catch{
+				return new HttpResponseMessage(HttpStatusCode.NotImplemented){Content = new StringContent("erreur send")};
+			}
+		}
+		catch{
+			return new HttpResponseMessage(HttpStatusCode.NotImplemented){Content = new StringContent("erreur reuqest")};
+		}
+	}
 }
