@@ -2,57 +2,62 @@
   "paths": {
     "/medias/{mediaId}/uploadappend": {
       "post": {
-        "consumes": ["multipart/form-data"],
+        "consumes": ["application/json"],
         "parameters": [
           {
-            "description": "the Media ID",
-            "x-ms-summary": "the Media ID",
+            "description": "the media ID",
             "in": "path",
             "name": "mediaId",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-summary": "the media ID"
           },
           {
             "default": "en",
-            "x-ms-summary": "Language usage",
             "description": "Language usage",
             "in": "header",
             "name": "Accept-Language",
-            "type": "string"
+            "type": "string",
+            "x-ms-summary": "Language usage"
           },
           {
-            "description": "the chunk ID",
-            "x-ms-summary": "the Chunk ID",
-            "in": "formData",
-            "name": "chunk_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "chunk index",
-            "x-ms-summary": "Chunk index",
-            "in": "formData",
-            "name": "segment_index",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "is this chunk the last one",
-            "x-ms-summary": "is this chunk the last one",
-            "in": "formData",
-            "name": "last_chunk",
-            "required": true,
-            "type": "boolean"
-          },
-          {
-            "description": "the stream",
-            "x-ms-summary": "the stream",
-            "in": "formData",
-            "name": "stream",
-            "required": true,
-            "type": "file"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "chunk_id": {
+                  "description": "chunk id",
+                  "type": "string"
+                },
+                "segment_index": {
+                  "description": "chunk index",
+                  "type": "integer"
+                },
+                "last_chunk": {
+                  "description": "is it the last chunk",
+                  "type": "boolean"
+                },
+                "stream": {
+                  "type": "object",
+                  "description": "binary stream",
+                  "properties": {
+                    "filename": {
+                      "type": "string"
+                    },
+                    "contentType": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string",
+                      "format": "byte"
+                    }
+                  }
+                }
+              }
+            }
           }
-        ]
+        ],
       }
     }
   }

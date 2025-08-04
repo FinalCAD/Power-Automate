@@ -223,18 +223,16 @@ void SupprimerPathProperties(JObject root)
                     {
                         string formatValue = param["format"].ToString();
                         if (formatValue == "date-span" || formatValue == "date-time" || formatValue == "uuid")
-                            toRemove.Add(param);
+                            paramObj.Remove("format");
                         if (paramObj.ContainsKey("type"))
                         {
                             string typeValue = param["type"].ToString();
                             if (typeValue== "integer")
-                                toRemove.Add(param);
+                                paramObj.Remove("format");
                         }
                     }
                 }
             }
-            foreach (var item in toRemove)
-                parameters.Remove(item);
         }
     }
 
@@ -643,9 +641,9 @@ void Affiche(string strOld,string strNew)
 
 //------------------------------------------------------------------------------------------------------------------------------
 
-var folder = "c:\\temp\\";
+var folder = "c:\\temp\\PowerAutomate\\";
 
-var jsonOrig = $"{folder}swagger3.json";
+var jsonOrig = $"{folder}swagger2.json";
 var jsonDest = $"{folder}swaggerZZZ.json";
 
 var jsonOrigTemp = $"{folder}Manuel Init.json";
