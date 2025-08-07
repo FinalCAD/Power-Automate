@@ -50,7 +50,6 @@
                     },
                     "content": {
                       "type": "string",
-                      "format": "byte"
                     }
                   }
                 }

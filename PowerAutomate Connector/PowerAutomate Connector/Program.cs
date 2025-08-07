@@ -54,6 +54,8 @@ void ModifierMethodes(JObject root)
                     //    paramObj2["x-ms-url-encoding"] = "single";
                     if (param is JObject paramObj3 && paramObj3.ContainsKey("in"))
                     {
+                        if (paramObj3["description"]?.ToString() == null)
+                            paramObj3["description"] = paramObj3["name"];
                         if (paramObj3["description"]?.ToString() == "")
                             paramObj3["description"] = paramObj3["name"];
                         paramObj3["x-ms-summary"] = paramObj3["description"];
@@ -653,7 +655,7 @@ var jsonInfoTemp = $"{folder}Manuel infos.json";
 var jsonResponseGetOrgaTemp = $"{folder}Manuel Response GetOrganizations.json";
 var jsonParametersUploadTemp = $"{folder}Manuel Parameters Upload Chunk.json";
 
-var jsonCompare = $"{folder}fnlcd_finalcad-20fc1_openapidefinition.json";
+var jsonCompare = $"{folder}Finalcad-Fc1.swagger-v2.json";
 
 string jsonFile = File.ReadAllText(jsonOrig);
 JObject root = JObject.Parse(jsonFile);
@@ -674,6 +676,6 @@ RemplacerParamsChunk(root, jsonParametersUploadTemp);
 
 Controle(root);
 
-//Compare(root, jsonCompare);
+Compare(root, jsonCompare);
 
 File.WriteAllText(jsonDest, root.ToString(Newtonsoft.Json.Formatting.Indented));
