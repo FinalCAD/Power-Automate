@@ -337,6 +337,78 @@ void RemplacerParamsChunk(JObject root, string jsonParamChunkTemp)
     pathCible["parameters"] = pathSourc["parameters"].DeepClone();
 }
 
+void RemoveUnusedDefs(JObject root)
+{
+
+    var definitions = root["definitions"] as JObject;
+    var initialRefs = new HashSet<string>();
+    foreach (var prop in root.Properties())
+    {
+        if (prop.Name != "definitions")
+            CollectRefs(prop.Value, initialRefs);
+    }
+    var allUsedDefs = new HashSet<string>();
+    var toProcess = new Queue<string>(initialRefs);
+
+    while (toProcess.Count > 0)
+    {
+        var current = toProcess.Dequeue();
+        if (allUsedDefs.Contains(current)) continue;
+
+        allUsedDefs.Add(current);
+
+        if (definitions[current] is JObject defObj)
+        {
+            var nestedRefs = new HashSet<string>();
+            CollectRefs(defObj, nestedRefs);
+
+            foreach (var nested in nestedRefs)
+            {
+                if (!allUsedDefs.Contains(nested))
+                    toProcess.Enqueue(nested);
+            }
+        }
+    }
+
+    // Étape 3 : supprimer les définitions non utilisées
+    var unusedDefs = definitions.Properties()
+        .Where(p => !allUsedDefs.Contains(p.Name))
+        .ToList();
+
+    foreach (var def in unusedDefs)
+    {
+        definitions.Remove(def.Name);
+    }
+}
+
+void CollectRefs(JToken token, HashSet<string> refs)
+{
+    if (token.Type == JTokenType.Object)
+    {
+        foreach (var prop in (token as JObject).Properties())
+        {
+            if (prop.Name == "$ref" && prop.Value.Type == JTokenType.String)
+            {
+                string refValue = prop.Value.ToString();
+                if (refValue.StartsWith("#/definitions/"))
+                {
+                    string defName = refValue.Substring("#/definitions/".Length);
+                    refs.Add(defName);
+                }
+            }
+            CollectRefs(prop.Value, refs);
+        }
+    }
+    else if (token.Type == JTokenType.Array)
+    {
+        foreach (var item in (JArray)token)
+        {
+            CollectRefs(item, refs);
+        }
+    }
+}
+
+
 //------------------------------------------------------------------------------------------------------------------------------
 void Controle(JObject root)
 {
@@ -673,9 +745,10 @@ RemplacerBlocsSecu(root,jsonSecuTemp);
 RemplacerBlocsInfos(root,jsonInfoTemp);
 RemplacerResponceGetOrga(root, jsonResponseGetOrgaTemp);
 RemplacerParamsChunk(root, jsonParametersUploadTemp);
+RemoveUnusedDefs(root);
 
 Controle(root);
 
-Compare(root, jsonCompare);
+//Compare(root, jsonCompare);
 
 File.WriteAllText(jsonDest, root.ToString(Newtonsoft.Json.Formatting.Indented));

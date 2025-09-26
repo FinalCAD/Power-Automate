@@ -31,8 +31,8 @@
               "properties": {
                 "language": {
                   "type": "string",
-                  "description": "Your language (should appair in the project)",
-                  "title": "Your language (should appair in the project)",
+                  "description": "Language",
+                  "title": "Language",
                   "default": "fr",
                   "x-ms-visibility": "important",
                   "x-ms-dynamic-list": {
@@ -45,8 +45,8 @@
                 },
                 "timezone": {
                   "type": "string",
-                  "description": "time-zone",
-                  "title": "Your time-zone",
+                  "description": "The user's time zone (in IANA format)",
+                  "title": "Time zone",
                   "x-ms-visibility": "important",
                   "x-ms-dynamic-list": {
                     "operationId": "GetTimezonesList",
@@ -100,9 +100,9 @@
               "properties": {
                 "business_organization_id": {
                   "type": "string",
-                  "description": "business organization id",
-                  "x-ms-summary": "business organization id",
-                  "title": "business organization id",
+                  "description": "Organization ID",
+                  "x-ms-summary": "Organization ID",
+                  "title": "Organization ID",
                   "x-ms-dynamic-values": {
                     "operationId": "GetOrganizations",
                     "value-path": "id",
@@ -111,9 +111,9 @@
                 },
                 "project_id": {
                   "type": "string",
-                  "description": "project id",
-                  "x-ms-summary": "project id",
-                  "title": "project id",
+                  "description": "Project ID",
+                  "x-ms-summary": "Project ID",
+                  "title": "Project ID",
                   "x-ms-dynamic-values": {
                     "operationId": "GetProjects",
                     "value-path": "project_id",

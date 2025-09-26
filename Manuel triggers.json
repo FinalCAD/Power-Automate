@@ -58,6 +58,7 @@
                   "type": "string",
                   "description": "business_organization_id",
                   "title": "",
+                  "x-ms-visibility": "important",
                   "x-ms-dynamic-values": {
                     "operationId": "GetOrganizations",
                     "value-path": "id",
@@ -68,6 +69,7 @@
                   "type": "string",
                   "description": "project_id",
                   "title": "",
+                  "x-ms-visibility": "important",
                   "x-ms-dynamic-values": {
                     "operationId": "GetProjects",
                     "value-path": "project_id",
@@ -100,7 +102,11 @@
                   "x-ms-notification-url": true
                 }
               },
-              "required": ["client_url"]
+              "required": [
+                "client_url",
+                "project_id",
+                "business_organization_id"
+              ]
             }
           }
         ]

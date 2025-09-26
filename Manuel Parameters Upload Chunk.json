@@ -5,20 +5,20 @@
         "consumes": ["application/json"],
         "parameters": [
           {
-            "description": "the media ID",
+            "description": "Media ID",
             "in": "path",
             "name": "mediaId",
             "required": true,
             "type": "string",
-            "x-ms-summary": "the media ID"
+            "x-ms-summary": "Media ID"
           },
           {
             "default": "en",
-            "description": "Language usage",
+            "description": "Language",
             "in": "header",
             "name": "Accept-Language",
             "type": "string",
-            "x-ms-summary": "Language usage"
+            "x-ms-summary": "Language"
           },
           {
             "name": "body",
@@ -27,20 +27,20 @@
               "type": "object",
               "properties": {
                 "chunk_id": {
-                  "description": "chunk id",
+                  "description": "Chunk Id",
                   "type": "string"
                 },
                 "segment_index": {
-                  "description": "chunk index",
+                  "description": "Chunk Number",
                   "type": "integer"
                 },
                 "last_chunk": {
-                  "description": "is it the last chunk",
+                  "description": "Last call?",
                   "type": "boolean"
                 },
                 "stream": {
                   "type": "object",
-                  "description": "binary stream",
+                  "description": "Binary Stream",
                   "properties": {
                     "filename": {
                       "type": "string"
@@ -50,13 +50,14 @@
                     },
                     "content": {
                       "type": "string",
+                      "format": "byte"
                     }
                   }
                 }
               }
             }
           }
-        ],
+        ]
       }
     }
   }
