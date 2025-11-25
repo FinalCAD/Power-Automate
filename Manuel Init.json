@@ -32,6 +32,7 @@
                 "language": {
                   "type": "string",
                   "description": "Language",
+                  "x-ms-summary": "Language",
                   "title": "Language",
                   "default": "fr",
                   "x-ms-visibility": "important",
@@ -46,6 +47,7 @@
                 "timezone": {
                   "type": "string",
                   "description": "The user's time zone (in IANA format)",
+                  "x-ms-summary": "The user's time zone (in IANA format)",
                   "title": "Time zone",
                   "x-ms-visibility": "important",
                   "x-ms-dynamic-list": {

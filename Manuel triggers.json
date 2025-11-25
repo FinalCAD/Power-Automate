@@ -56,7 +56,8 @@
                 },
                 "business_organization_id": {
                   "type": "string",
-                  "description": "business_organization_id",
+                  "description": "Organization ID",
+                  "x-ms-summary": "Organization ID",
                   "title": "",
                   "x-ms-visibility": "important",
                   "x-ms-dynamic-values": {
@@ -67,7 +68,8 @@
                 },
                 "project_id": {
                   "type": "string",
-                  "description": "project_id",
+                  "description": "Project ID",
+                  "x-ms-summary": "Project ID",
                   "title": "",
                   "x-ms-visibility": "important",
                   "x-ms-dynamic-values": {
@@ -95,7 +97,7 @@
                 },
                 "client_url": {
                   "type": "string",
-                  "description": "client_url",
+                  "description": "Client url",
                   "title": "",
                   "x-ms-visibility": "internal",
                   "default": "url",

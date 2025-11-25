@@ -27,15 +27,18 @@
               "type": "object",
               "properties": {
                 "chunk_id": {
-                  "description": "Chunk Id",
+                  "description": "Chunk ID",
+                  "x-ms-summary": "Chunk ID",
                   "type": "string"
                 },
                 "segment_index": {
                   "description": "Chunk Number",
+                  "x-ms-summary": "Segment number",
                   "type": "integer"
                 },
                 "last_chunk": {
                   "description": "Last call?",
+                  "x-ms-summary": "Last Call?",
                   "type": "boolean"
                 },
                 "stream": {
@@ -52,9 +55,11 @@
                       "type": "string",
                       "format": "byte"
                     }
-                  }
+                  },
+                  "required": ["content", "contentType", "filename"]
                 }
-              }
+              },
+              "required": ["chunk_id", "segment_index", "stream"]
             }
           }
         ]
